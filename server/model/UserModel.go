@@ -4,12 +4,21 @@ import (
   "server/dto"
   )
 
-func UserModelRegister(data *dto.User) {
+func UserModelRegister(data *dto.User)(error) {
   _,db := service.DatabaseService()
-  db.Create(&data)
+  result := db.Create(&data)
+  if(result.Error != nil) {
+    return result.Error
+  }
+  return nil
 }
 
-func UserModelLogin() {
+func UserModelLogin(email string) (error,[]dto.User){
   _,db := service.DatabaseService()
-  db.Find(&dto.User{})
+  var user []dto.User
+  result := db.Where("email=?",email).First(&user)
+  if(result.Error != nil) {
+    return result.Error,nil
+  }
+  return nil,user
 }
