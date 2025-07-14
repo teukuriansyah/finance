@@ -16,6 +16,7 @@ func main() {
   db.AutoMigrate(&dto.User{})
   
   route.UserRoute(app)
+  route.TransactionRoute(app)
   
   fmt.Print("Server is running on port 3000")
   app.Run(":3000")
