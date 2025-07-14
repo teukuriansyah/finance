@@ -14,6 +14,7 @@ func main() {
   
   app.Use(cors.Default())
   db.AutoMigrate(&dto.User{})
+  db.AutoMigrate(&dto.Transaction{})
   
   route.UserRoute(app)
   route.TransactionRoute(app)
