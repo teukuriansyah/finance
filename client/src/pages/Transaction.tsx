@@ -1,8 +1,9 @@
 import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import Sidebar from "../components/Sidebar.tsx"
 
-function Home() {
-  const pageName = (window.location.pathname)
+const Transaction = () => {
+  const pageName = window.location.pathname;
+  const changePageName = str => str.slice(1, 2).toUpperCase() + str.slice(2).toLowerCase();
   return (
     <>
       <Sidebar active={pageName}/>
@@ -13,7 +14,7 @@ function Home() {
             <IonButtons slot="start">
               <IonMenuButton color="dark"></IonMenuButton>
             </IonButtons>
-            <IonTitle color="dark">{pageName === "/" ? "Home" : pageName}</IonTitle>
+            <IonTitle color="dark">{pageName === "/" ? "Home" : changePageName(pageName)}</IonTitle>
           </IonToolbar>
         </IonHeader>
         
@@ -22,6 +23,7 @@ function Home() {
         </IonContent>
       </IonPage>
     </>
-  );
+  )
 }
-export default Home;
+
+export default Transaction

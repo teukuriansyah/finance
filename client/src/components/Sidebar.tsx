@@ -32,7 +32,7 @@ function Sidebar(props) {
             </li>
             <li className={`${props.active === "/summary" ? "bg-green-500" : ""} flex`}>
               <a href="/summary" className="!text-white text-2xl font-bold p-3 w-full flex gap-3">
-                <IonIcon color="dark" size="large" icon={props.active === "/summary" ? documentTextSharpSharp : documentTextOutline}></IonIcon>
+                <IonIcon color="dark" size="large" icon={props.active === "/summary" ? documentTextSharp : documentTextOutline}></IonIcon>
                 <span>Summary</span>
               </a>
             </li>
