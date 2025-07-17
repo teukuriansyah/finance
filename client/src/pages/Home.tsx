@@ -1,25 +1,27 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
-import './Home.css';
+import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import Sidebar from "../components/Sidebar.tsx"
 
-const Home: React.FC = () => {
+function Home() {
+  const pageName = window.location.pathname
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Blank</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
+    <>
+      <Sidebar/>
+      <IonPage id="main-content">
+        {/* Navbar */}
+        <IonHeader>
+          <IonToolbar color="success">
+            <IonButtons slot="start">
+              <IonMenuButton color="dark"></IonMenuButton>
+            </IonButtons>
+            <IonTitle color="dark">{pageName === "/" ? "Home" : pageName}</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer />
-      </IonContent>
-    </IonPage>
+        
+        {/* Content */}
+        <IonContent className="ion-padding">Tap the button in the toolbar to open the menu.
+        </IonContent>
+      </IonPage>
+    </>
   );
-};
-
+}
 export default Home;
