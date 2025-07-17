@@ -5,7 +5,7 @@ function Home() {
   const pageName = window.location.pathname
   return (
     <>
-      <Sidebar/>
+      <Sidebar active={pageName}/>
       <IonPage id="main-content">
         {/* Navbar */}
         <IonHeader>
