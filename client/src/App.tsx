@@ -7,6 +7,7 @@ import Transaction from './pages/Transaction';
 import User from './pages/User';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import AddTransaction from './pages/AddTransaction';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -61,6 +62,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/register">
           <Register />
+        </Route>
+        <Route exact path="/addtransaction">
+          <AddTransaction />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>
