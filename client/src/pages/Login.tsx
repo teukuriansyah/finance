@@ -1,5 +1,6 @@
 import { IonPage, IonInput, IonIcon, IonTitle, IonText } from '@ionic/react'
 import { personCircle } from "ionicons/icons"
+import service from "../services/services.ts"
 
 const Login = () => {
   const submitLogin = (formData) => {
@@ -7,6 +8,7 @@ const Login = () => {
       email:formData.get("email"),
       password:formData.get("password")
     }
+    service.loginUser(loginData)
     console.log(loginData)
   }
   return (

@@ -1,14 +1,16 @@
 import { IonPage, IonInput, IonIcon, IonTitle, IonText } from '@ionic/react'
 import { personCircle } from "ionicons/icons"
+import service from "../services/services.ts"
 
 const Register = () => {
-  const submitLogin = (formData) => {
-    const loginData = {
+  const submitRegister = (formData) => {
+    const registerData = {
       name:formData.get("name"),
       email:formData.get("email"),
       password:formData.get("password")
     }
-    console.log(loginData)
+    service.registerUser(registerData)
+    console.log(registerData)
   }
   return (
     <IonPage>
@@ -19,7 +21,7 @@ const Register = () => {
            <IonTitle>Register</IonTitle>
           </div>
           <div>
-            <form action={submitLogin} className="flex flex-col gap-2">
+            <form action={submitRegister} className="flex flex-col gap-2">
               <IonInput label="Name" type="text" placeholder="Input name" name="name" required></IonInput>
               <IonInput label="Email" type="email" placeholder="Input email" name="email" required></IonInput>
               <IonInput label="Password" type="password" placeholder="Input password" name="password" required></IonInput>
