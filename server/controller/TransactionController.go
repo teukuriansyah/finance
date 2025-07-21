@@ -46,7 +46,7 @@ func AddTransaction(c*gin.Context) {
       "statusCode":500,
       "message":"Add transaction failed",
     })
-    return
+    return;
   }
   c.JSON(201,gin.H{
     "statusCode":201,

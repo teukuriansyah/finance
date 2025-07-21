@@ -12,6 +12,14 @@ const service = {
   registerUser:async(dataBody) => {
     const { data } = await api.post("/registerUser",dataBody)
     return data
+  },
+  getTransaction:async(id) => {
+    const { data } = await api.post("/transaction/" + id)
+    return data
+  },
+  postTransaction:async(dataBody) => {
+    const { data } = await api.post("/transaction",dataBody)
+    return data
   }
 }
 

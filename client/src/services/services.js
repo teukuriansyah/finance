@@ -62,6 +62,28 @@ var service = {
                     return [2 /*return*/, data];
             }
         });
+    }); },
+    getTransaction: function (id) { return __awaiter(void 0, void 0, void 0, function () {
+        var data;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, api.post("/transaction/" + id)];
+                case 1:
+                    data = (_a.sent()).data;
+                    return [2 /*return*/, data];
+            }
+        });
+    }); },
+    postTransaction: function (dataBody) { return __awaiter(void 0, void 0, void 0, function () {
+        var data;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, api.post("/transaction", dataBody)];
+                case 1:
+                    data = (_a.sent()).data;
+                    return [2 /*return*/, data];
+            }
+        });
     }); }
 };
 exports.default = service;

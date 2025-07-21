@@ -1,14 +1,17 @@
 import { IonPage, IonInput, IonSelect, IonSelectOption, IonIcon } from '@ionic/react'
 import { arrowBackOutline } from "ionicons/icons"
+import service from "../services/services.ts"
 
 const AddTransaction = () => {
-  const submitTransaction = (formData) => {
+  const submitTransaction = async (formData) => {
     const dataTransaction = {
-      type:formData.get("type"),
+      idUser:"1",
+      isIncrease:formData.get("type") == "true",
       date:formData.get("date"),
-      amount:formData.get("amount"),
+      amount:parseInt(formData.get("amount")),
       notes:formData.get("notes"),
     }
+    const fetching = await service.postTransaction(dataTransaction)
     console.log(dataTransaction)
   }
   return (
