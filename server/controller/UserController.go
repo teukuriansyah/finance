@@ -22,9 +22,16 @@ func LoginUser(c*gin.Context) {
     })
     return;
   }
+  if(dataBody.Password != data[0].Password) {
+    c.JSON(404,gin.H{
+      "statusCode":404,
+      "message":"Login failed",
+    })
+    return;
+  }
   c.JSON(201,gin.H{
     "statusCode":201,
-    "data":data,
+    "data":data[0],
     "message":"Login successfully",
   })
 }
