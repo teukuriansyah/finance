@@ -38,7 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = require("axios");
 var api = axios_1.default.create({
-    baseURL: "http://localhost:3000"
+    baseURL: import.meta.env.VITE_ENDPOINT
 });
 var service = {
     loginUser: function (dataBody) { return __awaiter(void 0, void 0, void 0, function () {
