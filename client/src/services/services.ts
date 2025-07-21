@@ -5,13 +5,13 @@ const api = axios.create({
 })
 
 const service = {
-  loginUser:async(data) => {
-    const res = await api.post("/loginUser")
-    return res
+  loginUser:async(dataBody) => {
+    const { data } = await api.post("/loginUser",dataBody)
+    return { data }
   },
-  registerUser:async(data) => {
-    const res = await api.post("/registerUser")
-    return res
+  registerUser:async(dataBody) => {
+    const { data } = await api.post("/registerUser",dataBody)
+    return data
   }
 }
 

@@ -41,25 +41,25 @@ var api = axios_1.default.create({
     baseURL: "http://localhost:3000"
 });
 var service = {
-    loginUser: function (data) { return __awaiter(void 0, void 0, void 0, function () {
-        var res;
+    loginUser: function (dataBody) { return __awaiter(void 0, void 0, void 0, function () {
+        var data;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api.post("/loginUser")];
+                case 0: return [4 /*yield*/, api.post("/loginUser", dataBody)];
                 case 1:
-                    res = _a.sent();
-                    return [2 /*return*/, res];
+                    data = (_a.sent()).data;
+                    return [2 /*return*/, { data: data }];
             }
         });
     }); },
-    registerUser: function (data) { return __awaiter(void 0, void 0, void 0, function () {
-        var res;
+    registerUser: function (dataBody) { return __awaiter(void 0, void 0, void 0, function () {
+        var data;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api.post("/registerUser")];
+                case 0: return [4 /*yield*/, api.post("/registerUser", dataBody)];
                 case 1:
-                    res = _a.sent();
-                    return [2 /*return*/, res];
+                    data = (_a.sent()).data;
+                    return [2 /*return*/, data];
             }
         });
     }); }

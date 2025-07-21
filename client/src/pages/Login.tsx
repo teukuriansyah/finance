@@ -3,13 +3,13 @@ import { personCircle } from "ionicons/icons"
 import service from "../services/services.ts"
 
 const Login = () => {
-  const submitLogin = (formData) => {
+  const submitLogin = async(formData) => {
     const loginData = {
-      email:formData.get("email"),
-      password:formData.get("password")
+      email:window.btoa(formData.get("email")),
+      password:window.btoa(formData.get("password"))
     }
-    service.loginUser(loginData)
-    console.log(loginData)
+    const fetching = await service.loginUser(loginData)
+    console.log(fetching)
   }
   return (
     <IonPage>
