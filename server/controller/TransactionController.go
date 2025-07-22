@@ -19,7 +19,7 @@ func GetTransaction(c*gin.Context) {
   if(len(data) == 0) {
     c.JSON(200,gin.H{
       "statusCode":200,
-      "data":"data",
+      "data":[]dto.Transaction{},
       "message":"Get transaction successfully",
     })
     return;

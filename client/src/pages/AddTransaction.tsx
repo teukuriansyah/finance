@@ -1,4 +1,4 @@
-import { IonPage, IonInput, IonSelect, IonSelectOption, IonIcon } from '@ionic/react'
+import { IonPage, IonInput, IonSelect, IonSelectOption, IonIcon, IonToast } from '@ionic/react'
 import { arrowBackOutline } from "ionicons/icons"
 import service from "../services/services.ts"
 
@@ -12,7 +12,6 @@ const AddTransaction = () => {
       notes:formData.get("notes"),
     }
     const fetching = await service.postTransaction(dataTransaction)
-    console.log(dataTransaction)
   }
   return (
     <>
@@ -32,10 +31,11 @@ const AddTransaction = () => {
               <IonInput label="Date" type="date" name="date" className="border-b-2 border-green-500" required></IonInput>
               <IonInput label="Amount" type="number" name="amount" className="border-b-2 border-green-500" required></IonInput>
               <IonInput label="Notes" type="text" name="notes" className="border-b-2 border-green-500" required></IonInput>
-              <button type="submit" className="mt-7 bg-green-500 font-bold w-full !p-2 !rounded">Submit</button>
+              <button id="submit-transaction" type="submit" className="mt-7 bg-green-500 font-bold w-full !p-2 !rounded">Submit</button>
             </form>
           </div>
         </div>
+        <IonToast trigger="submit-transaction" message="Add transaction success" color="success" duration={3000}></IonToast>
       </IonPage>
     </>
   )
