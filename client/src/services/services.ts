@@ -14,7 +14,7 @@ const service = {
     return data
   },
   getTransaction:async(id) => {
-    const { data } = await api.post("/transaction/" + id)
+    const { data } = await api.get("/transactionById/" + id)
     return data
   },
   postTransaction:async(dataBody) => {

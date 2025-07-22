@@ -67,7 +67,7 @@ var service = {
         var data;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api.post("/transaction/" + id)];
+                case 0: return [4 /*yield*/, api.get("/transactionById/" + id)];
                 case 1:
                     data = (_a.sent()).data;
                     return [2 /*return*/, data];
