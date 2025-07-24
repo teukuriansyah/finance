@@ -3,6 +3,7 @@ import (
   "github.com/gin-gonic/gin"
   "server/model"
   "server/dto"
+  "server/middleware"
   )
 
 func LoginUser(c*gin.Context) {
@@ -29,9 +30,17 @@ func LoginUser(c*gin.Context) {
     })
     return;
   }
+  
+  token := middleware.CreateToken(data[0])
+  if(token == "Error") {
+    c.JSON(500,gin.H{
+      "message":"Unauthorized",
+    })
+    return;
+  }
   c.JSON(201,gin.H{
     "statusCode":201,
-    "data":data[0],
+    "token":token,
     "message":"Login successfully",
   })
 }
