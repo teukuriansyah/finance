@@ -4,10 +4,18 @@ import (
   "github.com/gin-gonic/gin"
   "server/model"
   "server/dto"
+  "server/middleware"
+  "fmt"
   )
 
 func GetTransaction(c*gin.Context) {
   idUser := c.Param("idUser")
+  
+  token,err := middleware.VerifyToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IloyRmxkV3hqWVc1MGFXdEFaMjFoYVd3dVkyOXQiLCJleHAiOjE3NTM0NTY1OTksImlhdCI6MTc1MzQ1Mjk5OSwiaWQiOiI3IiwibmFtZSI6IkdhZXVsIn0.PPF1lCVtYq63gPM5Y-xgZPAoGI3P73noluaEYYM-wUw")
+  
+  fmt.Println(token)
+  fmt.Println(err)
+  
   err,data := model.GetTransactionByIdUser(idUser)
   if(err != nil) {
     c.JSON(500,gin.H{
