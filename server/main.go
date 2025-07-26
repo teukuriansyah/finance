@@ -2,6 +2,7 @@ package main
 import (
   "github.com/gin-contrib/cors"
   "github.com/gin-gonic/gin"
+  "github.com/joho/godotenv"
   "server/service"
   "server/route"
   "server/dto"
@@ -9,6 +10,11 @@ import (
   )
 
 func main() {
+  err := godotenv.Load()
+  if err != nil {
+    fmt.Print("Error loading .env file")
+  }
+  
   app := gin.Default()
   _,db := service.DatabaseService()
   
