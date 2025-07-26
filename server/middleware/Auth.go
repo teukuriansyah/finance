@@ -15,7 +15,7 @@ func CreateToken(dataPayload dto.User) string {
     "id":dataPayload.Id,
     "name":dataPayload.Name,
     "email":dataPayload.Email,
-    "exp":time.Now().UTC().Add(24 * time.Hour).Unix(),
+    "exp":time.Now().UTC().Add(time.Hour).Unix(),
     "iat":time.Now().UTC().Unix(),
   })
   

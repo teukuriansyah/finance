@@ -1,20 +1,30 @@
 package controller
 
 import (
+  "github.com/golang-jwt/jwt/v5"
   "github.com/gin-gonic/gin"
+  "server/middleware"
   "server/model"
   "server/dto"
-  "server/middleware"
-  "fmt"
+  "strings"
   )
 
 func GetTransaction(c*gin.Context) {
-  idUser := c.Param("idUser")
+  header := c.GetHeader("Authorization")
   
-  token,err := middleware.VerifyToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IloyRmxkV3hqWVc1MGFXdEFaMjFoYVd3dVkyOXQiLCJleHAiOjE3NTM0NTY1OTksImlhdCI6MTc1MzQ1Mjk5OSwiaWQiOiI3IiwibmFtZSI6IkdhZXVsIn0.PPF1lCVtYq63gPM5Y-xgZPAoGI3P73noluaEYYM-wUw")
+  token,err := middleware.VerifyToken(strings.Split(header," ")[1])
   
-  fmt.Println(token)
-  fmt.Println(err)
+  if(err != nil) {
+    c.JSON(401,gin.H{
+      "statusCode":401,
+      "message":"Unauthorized",
+    })
+    return;
+  }
+  
+  claims,_ := token.Claims.(jwt.MapClaims)
+  
+  idUser := claims["id"].(string)
   
   err,data := model.GetTransactionByIdUser(idUser)
   if(err != nil) {
