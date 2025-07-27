@@ -1,17 +1,31 @@
-import { IonPage, IonInput, IonIcon, IonTitle, IonText } from '@ionic/react'
+import { IonPage, IonInput, IonIcon, IonTitle, IonText, IonToast } from '@ionic/react'
 import { personCircle } from "ionicons/icons"
+import { useState, useEffect } from "react"
 import service from "../services/services.ts"
 
 const Login = () => {
+  const [isShowToast, setIsShowToast] = useState(false)
+  
   const submitLogin = async(formData) => {
-    const loginData = {
-      email:window.btoa(formData.get("email")),
-      password:window.btoa(formData.get("password"))
+    try {
+      const loginData = {
+        email:window.btoa(formData.get("email")),
+        password:window.btoa(formData.get("password"))
+      }
+      const { data } = await service.loginUser(loginData)
+      localStorage.setItem("token",data.token)
+      window.location.assign("/")
     }
-    const { data } = await service.loginUser(loginData)
-    localStorage.setItem("token",data.token)
-    window.location.assign("/")
+    catch {
+      setIsShowToast(true)
+    }
   }
+  
+  useEffect(() => {
+    if(isShowToast) {
+      setTimeout(() => setIsShowToast(false),3000)
+    }
+  },[submitLogin])
   return (
     <IonPage>
       <div className="flex justify-center items-center h-full">
@@ -32,6 +46,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <IonToast isOpen={isShowToast} message="Login failed" color="danger" duration={3000}></IonToast>
     </IonPage>
   )
 }

@@ -1,11 +1,14 @@
 import { IonPage, IonInput, IonSelect, IonSelectOption, IonIcon, IonToast } from '@ionic/react'
 import { arrowBackOutline } from "ionicons/icons"
+import { useState, useEffect } from "react"
+import { jwtDecode } from "jwt-decode"
 import service from "../services/services.ts"
 
 const AddTransaction = () => {
+  let [idUser, setIdUser] = useState("0")
   const submitTransaction = async (formData) => {
     const dataTransaction = {
-      idUser:"8",
+      idUser:idUser,
       isIncrease:formData.get("type") == "true",
       date:formData.get("date"),
       amount:parseInt(formData.get("amount")),
@@ -13,6 +16,23 @@ const AddTransaction = () => {
     }
     const fetching = await service.postTransaction(dataTransaction)
   }
+  
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    if(token == null) {
+      window.location.assign("/login")
+      return;
+    }
+    const tokenDecode = jwtDecode(token)
+    const currentTime = Date.now() / 1000
+    if(tokenDecode.exp < currentTime) {
+      window.location.assign("/login")
+    }
+    else {
+      setIdUser(tokenDecode.idUser)
+    }
+  },[])
+  
   return (
     <>
       <IonPage>

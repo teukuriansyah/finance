@@ -25,15 +25,13 @@ function Home() {
       setDatas(data)
       }
     catch {
-      alert("Error")
+      window.location.assign("/login")
     }
   }
   
   useEffect(() => {
     fetchingData()
   },[])
-  
-  setTimeout(() => console.log(datas),2000)
   return (
     <>
       <Sidebar active={pageName}/>

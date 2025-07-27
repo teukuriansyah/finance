@@ -1,10 +1,36 @@
 import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonIcon, IonText } from '@ionic/react';
 import { personCircle } from "ionicons/icons"
+import { useEffect, useState } from "react"
+import { jwtDecode } from "jwt-decode"
 import Sidebar from '../components/Sidebar.tsx'
 
 const User = () => {
+  const [dataUser, setDataUser] = useState("")
   const pageName = window.location.pathname;
   const changePageName = str => str.slice(1, 2).toUpperCase() + str.slice(2).toLowerCase();
+  
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    if(token == null) {
+      window.location.assign("/login")
+      return;
+    }
+    const tokenDecode = jwtDecode(token)
+    const currentTime = Date.now() / 1000
+    if(tokenDecode.exp < currentTime) {
+      window.location.assign("/login")
+    }
+    else {
+      setDataUser(tokenDecode)
+    }
+
+  },[])
+  
+  const handleLogout = () => {
+    localStorage.removeItem("token")
+    window.location.assign("/login")
+  }
+  
   return (
     <>
       <Sidebar active={pageName}/>
@@ -30,17 +56,17 @@ const User = () => {
                 <IonText>
                   <div className="flex flex-col gap-3">
                    <div>
-                     <span>Nama: </span>
+                     <span>Nama : { dataUser == "" ? "" : dataUser.name }</span>
                    </div>
                    <div>
-                     <span>Email: </span>
+                     <span>Email : { dataUser == "" ? "" : window.atob(dataUser.email)}</span>
                    </div>
                   </div>
                 </IonText>
               </div>
             </div>
             <div>
-              <IonButtons className="bg-green-500 px-3 py-1 rounded font-bold text-lg">Logout</IonButtons>
+              <IonButtons className="bg-green-500 px-3 py-1 rounded font-bold text-lg" onClick={() => handleLogout()}>Logout</IonButtons>
             </div>
           </div>
         </IonContent>

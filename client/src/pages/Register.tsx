@@ -1,17 +1,30 @@
 import { IonPage, IonInput, IonIcon, IonTitle, IonText } from '@ionic/react'
 import { personCircle } from "ionicons/icons"
+import { useState, useEffect } from "react"
 import service from "../services/services.ts"
 
 const Register = () => {
+  const [isShowToast, setIsShowToast] = useState(false)
+  
   const submitRegister = async (formData) => {
-    const registerData = {
-      name:formData.get("name"),
-      email:window.btoa(formData.get("email")),
-      password:window.btoa(formData.get("password"))
+    try {
+      const registerData = {
+        name:formData.get("name"),
+        email:window.btoa(formData.get("email")),
+        password:window.btoa(formData.get("password"))
+      }
+      const fetching = await service.registerUser(registerData)
     }
-    const fetching = await service.registerUser(registerData)
-    console.log(fetching)
+    catch {
+      setIsShowToast(true)
+    }
   }
+  
+  useEffect(() => {
+    if(isShowToast) {
+      setTimeout(() => setIsShowToast(false),3000)
+    }
+  },[submitRegister])
   return (
     <IonPage>
       <div className="flex justify-center items-center h-full">
@@ -33,6 +46,7 @@ const Register = () => {
           </div>
         </div>
       </div>
+      <IonToast isOpen={isShowToast} message="Register failed" color="danger" duration={3000}></IonToast>
     </IonPage>
   )
 }

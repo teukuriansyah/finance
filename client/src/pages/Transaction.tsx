@@ -16,8 +16,8 @@ const Transaction = () => {
       const { data } = await service.getTransaction(token)
       setDatas(data)
     }
-    catch (err){
-      console.log(err)
+    catch{
+      window.location.assign("/login")
     }
   }
   

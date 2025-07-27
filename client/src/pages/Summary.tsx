@@ -14,8 +14,13 @@ const Summary = () => {
   const changePageName = str => str.slice(1, 2).toUpperCase() + str.slice(2).toLowerCase();
   
   const fetchingData = async() => {
-    const { data } = await service.getTransaction(token)
-    setDatas(JSON.stringify(data))
+    try {
+      const { data } = await service.getTransaction(token)
+      setDatas(JSON.stringify(data))
+    }
+    catch {
+      window.location.assign("/login")
+    }
   }
   
   const summaryTransaction = async () => {
