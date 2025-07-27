@@ -5,25 +5,35 @@ import Sidebar from "../components/Sidebar.tsx"
 
 function Home() {
   let [amount, setAmount] = useState(0)
+  let [datas,setDatas] = useState([])
   const pageName = (window.location.pathname)
+  const token = localStorage.getItem("token")
   
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   
   const fetchingData = async() => {
-    const { data } = await service.getTransaction(1)
-    const calculatedAmount = data.reduce((total, transaction) => {
-        return transaction.isIncrease 
-          ? total + transaction.amount 
-          : total - transaction.amount;
-      }, 0)
-    setAmount(calculatedAmount)
+    try {
+      const { data } = await service.getTransaction(token)
+      const calculatedAmount = data.reduce((total, transaction) => {
+          return transaction.isIncrease 
+            ? total + transaction.amount 
+            : total - transaction.amount;
+        }, 0)
+      setAmount(calculatedAmount)
+      setDatas(data)
+      }
+    catch {
+      alert("Error")
+    }
   }
   
   useEffect(() => {
     fetchingData()
   },[])
+  
+  setTimeout(() => console.log(datas),2000)
   return (
     <>
       <Sidebar active={pageName}/>

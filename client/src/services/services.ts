@@ -13,8 +13,12 @@ const service = {
     const { data } = await api.post("/registerUser",dataBody)
     return data
   },
-  getTransaction:async(id) => {
-    const { data } = await api.get("/transactionById/" + id)
+  getTransaction:async(token) => {
+    const { data } = await api.get("/transaction",{
+      headers: {
+        'Authorization':`Bearer ${token}`
+      }
+    })
     return data
   },
   postTransaction:async(dataBody) => {

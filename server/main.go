@@ -7,6 +7,7 @@ import (
   "server/route"
   "server/dto"
   "fmt"
+  "time"
   )
 
 func main() {
@@ -18,7 +19,15 @@ func main() {
   app := gin.Default()
   _,db := service.DatabaseService()
   
-  app.Use(cors.Default())
+  app.Use(cors.New(cors.Config{
+      AllowOrigins:[]string{"*"},
+      AllowMethods:[]string{"GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"},
+      AllowHeaders:[]string{"Origin", "Content-Length", "Content-Type", "Authorization"},
+      ExposeHeaders:[]string{"Content-Length"},
+      AllowCredentials: true,
+      MaxAge:12 * time.Hour,
+  }))
+  
   db.AutoMigrate(&dto.User{})
   db.AutoMigrate(&dto.Transaction{})
   

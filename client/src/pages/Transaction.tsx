@@ -6,25 +6,28 @@ import Sidebar from "../components/Sidebar.tsx"
 import List from "../components/List.tsx"
 
 const Transaction = () => {
-  const [datas,setDatas] = useState([])
+  let [datas,setDatas] = useState([])
   const pageName = window.location.pathname;
+  const token = localStorage.getItem("token")
   const changePageName = str => str.slice(1, 2).toUpperCase() + str.slice(2).toLowerCase();
   
   const fetchingData = async() => {
-    const { data } = await service.getTransaction(1)
-    setDatas(data)
+    try {
+      const { data } = await service.getTransaction(token)
+      setDatas(data)
+    }
+    catch (err){
+      console.log(err)
+    }
   }
   
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  
   useEffect(() => {
     fetchingData()
   },[])
-  
-  setTimeout(() => console.log(datas),5000)
   return (
     <>
       <Sidebar active={pageName}/>

@@ -63,11 +63,15 @@ var service = {
             }
         });
     }); },
-    getTransaction: function (id) { return __awaiter(void 0, void 0, void 0, function () {
+    getTransaction: function (token) { return __awaiter(void 0, void 0, void 0, function () {
         var data;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api.get("/transactionById/" + id)];
+                case 0: return [4 /*yield*/, api.get("/transaction", {
+                        headers: {
+                            'Authorization': "Bearer ".concat(token)
+                        }
+                    })];
                 case 1:
                     data = (_a.sent()).data;
                     return [2 /*return*/, data];

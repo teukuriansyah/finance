@@ -8,8 +8,9 @@ const Login = () => {
       email:window.btoa(formData.get("email")),
       password:window.btoa(formData.get("password"))
     }
-    const fetching = await service.loginUser(loginData)
-    console.log(fetching)
+    const { data } = await service.loginUser(loginData)
+    localStorage.setItem("token",data.token)
+    window.location.assign("/")
   }
   return (
     <IonPage>

@@ -10,10 +10,11 @@ const Summary = () => {
   const [textSummary,setTextSummary] = useState("")
   const [textRecommended,setTextRecommended] = useState("")
   const pageName = window.location.pathname;
+  const token = localStorage.getItem("token")
   const changePageName = str => str.slice(1, 2).toUpperCase() + str.slice(2).toLowerCase();
   
   const fetchingData = async() => {
-    const { data } = await service.getTransaction(1)
+    const { data } = await service.getTransaction(token)
     setDatas(JSON.stringify(data))
   }
   

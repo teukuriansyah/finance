@@ -5,7 +5,7 @@ import service from "../services/services.ts"
 const AddTransaction = () => {
   const submitTransaction = async (formData) => {
     const dataTransaction = {
-      idUser:"1",
+      idUser:"8",
       isIncrease:formData.get("type") == "true",
       date:formData.get("date"),
       amount:parseInt(formData.get("amount")),
