@@ -2,28 +2,27 @@ import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, Ion
 import { personCircle } from "ionicons/icons"
 import { useEffect, useState } from "react"
 import { jwtDecode } from "jwt-decode"
+import service from "../services/services.ts"
 import Sidebar from '../components/Sidebar.tsx'
 
 const User = () => {
   const [dataUser, setDataUser] = useState("")
   const pageName = window.location.pathname;
+  const token = localStorage.getItem("token")
   const changePageName = str => str.slice(1, 2).toUpperCase() + str.slice(2).toLowerCase();
   
+  const fetchingData = async() => {
+    try {
+      const { data } = await service.getUser(token)
+      setDataUser(data)
+    }
+    catch {
+      window.location.assign("/login")
+    }
+  }
+  
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    if(token == null) {
-      window.location.assign("/login")
-      return;
-    }
-    const tokenDecode = jwtDecode(token)
-    const currentTime = Date.now() / 1000
-    if(tokenDecode.exp < currentTime) {
-      window.location.assign("/login")
-    }
-    else {
-      setDataUser(tokenDecode)
-    }
-
+    fetchingData()
   },[])
   
   const handleLogout = () => {

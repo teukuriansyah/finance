@@ -14,7 +14,7 @@ const Transaction = () => {
   const fetchingData = async() => {
     try {
       const { data } = await service.getTransaction(token)
-      setDatas(data)
+      setDatas(data.reverse())
     }
     catch{
       window.location.assign("/login")

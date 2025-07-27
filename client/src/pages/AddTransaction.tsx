@@ -6,6 +6,7 @@ import service from "../services/services.ts"
 
 const AddTransaction = () => {
   let [idUser, setIdUser] = useState("0")
+  const token = localStorage.getItem("token")
   const submitTransaction = async (formData) => {
     const dataTransaction = {
       idUser:idUser,
@@ -17,20 +18,18 @@ const AddTransaction = () => {
     const fetching = await service.postTransaction(dataTransaction)
   }
   
+  const fetchingData = async() => {
+    try {
+      const { data } = await service.getUser(token)
+      setIdUser(data.id)
+    }
+    catch {
+      window.location.assign("/login")
+    }
+  }
+  
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    if(token == null) {
-      window.location.assign("/login")
-      return;
-    }
-    const tokenDecode = jwtDecode(token)
-    const currentTime = Date.now() / 1000
-    if(tokenDecode.exp < currentTime) {
-      window.location.assign("/login")
-    }
-    else {
-      setIdUser(tokenDecode.idUser)
-    }
+    fetchingData()
   },[])
   
   return (

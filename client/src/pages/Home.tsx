@@ -5,7 +5,6 @@ import Sidebar from "../components/Sidebar.tsx"
 
 function Home() {
   let [amount, setAmount] = useState(0)
-  let [datas,setDatas] = useState([])
   const pageName = (window.location.pathname)
   const token = localStorage.getItem("token")
   
@@ -22,7 +21,6 @@ function Home() {
             : total - transaction.amount;
         }, 0)
       setAmount(calculatedAmount)
-      setDatas(data)
       }
     catch {
       window.location.assign("/login")

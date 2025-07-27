@@ -22,3 +22,13 @@ func UserModelLogin(email string) (error,[]dto.User){
   }
   return nil,user
 }
+
+func UserModel (id string) (error,[]dto.User) {
+  _,db := service.DatabaseService()
+  var user []dto.User
+  result := db.Where("id=?",id).First(&user)
+  if(result.Error != nil) {
+    return result.Error,nil
+  }
+  return nil,user
+}
