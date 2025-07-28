@@ -1,12 +1,14 @@
 import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonText, IonIcon } from '@ionic/react';
 import { addOutline } from "ionicons/icons"
 import { useState, useEffect } from "react"
+import { jwtDecode } from "jwt-decode"
 import service from "../services/services.ts"
 import Sidebar from "../components/Sidebar.tsx"
 import List from "../components/List.tsx"
 
 const Transaction = () => {
   let [datas,setDatas] = useState([])
+  let [nameUser, setNameUser] = useState("")
   const pageName = window.location.pathname;
   const token = localStorage.getItem("token")
   const changePageName = str => str.slice(1, 2).toUpperCase() + str.slice(2).toLowerCase();
@@ -25,12 +27,23 @@ const Transaction = () => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
+  const getNameUser = () => {
+    if(token == null) {
+      window.location.assign("/login")
+    }
+    else {
+      const { name } = jwtDecode(token)
+      setNameUser(name)
+    }
+  }
+
   useEffect(() => {
     fetchingData()
+    getNameUser()
   },[])
   return (
     <>
-      <Sidebar active={pageName}/>
+      <Sidebar active={pageName} name={nameUser}/>
       <IonPage id="main-content">
         {/* Navbar */}
         <IonHeader>

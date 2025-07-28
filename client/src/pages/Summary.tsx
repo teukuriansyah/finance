@@ -2,12 +2,14 @@ import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, Ion
 import { summary } from "../utils/groq.ts"
 import { recommended } from "../utils/groq.ts"
 import { useState, useEffect } from "react"
+import { jwtDecode } from "jwt-decode"
 import Sidebar from "../components/Sidebar.tsx"
 import service from "../services/services.ts"
 
 const Summary = () => {
   const [datas, setDatas] = useState("")
   const [textSummary,setTextSummary] = useState("")
+  let [nameUser, setNameUser] = useState("")
   const [textRecommended,setTextRecommended] = useState("")
   const pageName = window.location.pathname;
   const token = localStorage.getItem("token")
@@ -34,12 +36,23 @@ const Summary = () => {
     },100)
   }
   
+  const getNameUser = () => {
+    if(token == null) {
+      window.location.assign("/login")
+    }
+    else {
+      const { name } = jwtDecode(token)
+      setNameUser(name)
+    }
+  }
+  
   useEffect(() => {
     fetchingData()
+    getNameUser()
   },[])
   return (
     <>
-      <Sidebar active={pageName}/>
+      <Sidebar active={pageName} name={nameUser}/>
       <IonPage id="main-content">
         {/* Navbar */}
         <IonHeader>

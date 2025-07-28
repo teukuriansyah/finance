@@ -17,8 +17,8 @@ const service = {
     const { data } = await api.get("/user",{
       headers:{
         'Authorization':`Bearer ${token}`
-      }
-    })
+        }
+      })
     return data
   },
   getTransaction:async(token) => {

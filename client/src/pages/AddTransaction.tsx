@@ -18,18 +18,18 @@ const AddTransaction = () => {
     const fetching = await service.postTransaction(dataTransaction)
   }
   
-  const fetchingData = async() => {
-    try {
-      const { data } = await service.getUser(token)
-      setIdUser(data.id)
-    }
-    catch {
+  const getIdUser = () => {
+    if(token == null) {
       window.location.assign("/login")
+    }
+    else {
+      const { id } = jwtDecode(token)
+      setIdUser(id)
     }
   }
   
   useEffect(() => {
-    fetchingData()
+    getIdUser()
   },[])
   
   return (

@@ -1,10 +1,8 @@
 import React from 'react';
 import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonIcon, } from '@ionic/react';
 import { personCircle, homeSharp, homeOutline, documentTextOutline, documentTextSharp, cashOutline, cashSharp } from "ionicons/icons"
-import { jwtDecode } from "jwt-decode"
 
 function Sidebar(props) {
-  const { name } = jwtDecode(localStorage.getItem("token"))
   return (
     <>
       <IonMenu contentId="main-content">
@@ -13,7 +11,7 @@ function Sidebar(props) {
             <div className="px-3 gap-3">
               <a href="/user" className="flex gap-3">
                 <IonIcon color="dark" size="large" icon={personCircle}></IonIcon>
-                <IonTitle color="dark">{ name }</IonTitle>
+                <IonTitle color="dark">{props.name}</IonTitle>
               </a>
             </div>
           </IonToolbar>

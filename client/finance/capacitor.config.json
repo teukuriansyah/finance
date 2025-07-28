@@ -1,0 +1,10 @@
+{
+  "appId": "com.test.finance",
+  "appName": "Finance",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false
+    }
+  }
+}

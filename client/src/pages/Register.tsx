@@ -1,10 +1,12 @@
-import { IonPage, IonInput, IonIcon, IonTitle, IonText } from '@ionic/react'
+import { IonPage, IonInput, IonIcon, IonTitle, IonText, IonToast } from '@ionic/react'
 import { personCircle } from "ionicons/icons"
 import { useState, useEffect } from "react"
 import service from "../services/services.ts"
 
 const Register = () => {
   const [isShowToast, setIsShowToast] = useState(false)
+  const [messageToast, setMessageToast] = useState("")
+  const [color, setColor] = useState("")
   
   const submitRegister = async (formData) => {
     try {
@@ -14,9 +16,14 @@ const Register = () => {
         password:window.btoa(formData.get("password"))
       }
       const fetching = await service.registerUser(registerData)
+      setIsShowToast(true)
+      setMessageToast("Register success")
+      setColor("success")
     }
     catch {
       setIsShowToast(true)
+      setMessageToast("Register failed")
+      setColor("danger")
     }
   }
   
@@ -46,7 +53,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-      <IonToast isOpen={isShowToast} message="Register failed" color="danger" duration={3000}></IonToast>
+      <IonToast isOpen={isShowToast} message={messageToast} color={color} duration={3000}></IonToast>
     </IonPage>
   )
 }

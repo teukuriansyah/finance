@@ -8,31 +8,31 @@ import Sidebar from '../components/Sidebar.tsx'
 const User = () => {
   const [dataUser, setDataUser] = useState("")
   const pageName = window.location.pathname;
-  const token = localStorage.getItem("token")
   const changePageName = str => str.slice(1, 2).toUpperCase() + str.slice(2).toLowerCase();
+  const token = localStorage.getItem("token")
   
-  const fetchingData = async() => {
-    try {
-      const { data } = await service.getUser(token)
-      setDataUser(data)
-    }
-    catch {
+  const getDataUser = () => {
+    if(token == null) {
       window.location.assign("/login")
     }
+    else {
+      const data = jwtDecode(token)
+      setDataUser(data)
+    }
   }
-  
-  useEffect(() => {
-    fetchingData()
-  },[])
   
   const handleLogout = () => {
     localStorage.removeItem("token")
     window.location.assign("/login")
   }
   
+  useEffect(() => {
+    getDataUser()
+  },[])
+  
   return (
     <>
-      <Sidebar active={pageName}/>
+      <Sidebar active={pageName} name={dataUser.name}/>
       <IonPage id="main-content">
         {/* Navbar */}
         <IonHeader>
