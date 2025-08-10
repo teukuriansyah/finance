@@ -58,9 +58,9 @@ const Summary = () => {
         <IonHeader>
           <IonToolbar color="success">
             <IonButtons slot="start">
-              <IonMenuButton color="dark"></IonMenuButton>
+              <IonMenuButton color="light"></IonMenuButton>
             </IonButtons>
-            <IonTitle color="dark">{pageName === "/" ? "Home" : changePageName(pageName)}</IonTitle>
+            <IonTitle color="light">{pageName === "/" ? "Home" : changePageName(pageName)}</IonTitle>
           </IonToolbar>
         </IonHeader>
         
@@ -68,7 +68,7 @@ const Summary = () => {
         <IonContent className="ion-padding">
           <div className="flex justify-between items-center">
             <IonText className="sm:w-3/6 text-gray-600">Click the button to know about your summary financial</IonText>
-            <IonButtons className="bg-green-500 rounded p-3 font-bold" onClick={() => summaryTransaction()}>Generate Summary</IonButtons>
+            <IonButtons className="bg-green-500 rounded p-3 font-bold !text-white" onClick={() => summaryTransaction()}>Generate Summary</IonButtons>
           </div>
           <div className="mt-8 flex flex-col gap-3">
             <div>

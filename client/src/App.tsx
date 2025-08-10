@@ -34,7 +34,7 @@ import '@ionic/react/css/display.css';
 
 /* import '@ionic/react/css/palettes/dark.always.css'; */
 /* import '@ionic/react/css/palettes/dark.class.css'; */
-import '@ionic/react/css/palettes/dark.system.css';
+// import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
@@ -43,7 +43,7 @@ setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter>
+    {<IonReactRouter>
       <IonRouterOutlet>
         <Route exact path="/">
           <Home />
@@ -67,7 +67,7 @@ const App: React.FC = () => (
           <AddTransaction />
         </Route>
       </IonRouterOutlet>
-    </IonReactRouter>
+    </IonReactRouter>}
   </IonApp>
 );
 

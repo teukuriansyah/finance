@@ -49,9 +49,9 @@ const Transaction = () => {
         <IonHeader>
           <IonToolbar color="success">
             <IonButtons slot="start">
-              <IonMenuButton color="dark"></IonMenuButton>
+              <IonMenuButton color="light"></IonMenuButton>
             </IonButtons>
-            <IonTitle color="dark">{pageName === "/" ? "Home" : changePageName(pageName)}</IonTitle>
+            <IonTitle color="light">{pageName === "/" ? "Home" : changePageName(pageName)}</IonTitle>
           </IonToolbar>
         </IonHeader>
         

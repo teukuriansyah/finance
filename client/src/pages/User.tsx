@@ -38,9 +38,9 @@ const User = () => {
         <IonHeader>
           <IonToolbar color="success">
             <IonButtons slot="start">
-              <IonMenuButton color="dark"></IonMenuButton>
+              <IonMenuButton color="light"></IonMenuButton>
             </IonButtons>
-            <IonTitle color="dark">{pageName === "/" ? "Home" : changePageName(pageName)}</IonTitle>
+            <IonTitle color="light">{pageName === "/" ? "Home" : changePageName(pageName)}</IonTitle>
           </IonToolbar>
         </IonHeader>
         
@@ -65,7 +65,7 @@ const User = () => {
               </div>
             </div>
             <div>
-              <IonButtons className="bg-green-500 px-3 py-1 rounded font-bold text-lg" onClick={() => handleLogout()}>Logout</IonButtons>
+              <IonButtons className="bg-green-500 px-3 py-1 rounded font-bold text-lg !text-white" onClick={() => handleLogout()}>Logout</IonButtons>
             </div>
           </div>
         </IonContent>

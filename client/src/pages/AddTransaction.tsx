@@ -38,7 +38,7 @@ const AddTransaction = () => {
         <div>
           <nav className="bg-green-500 p-3 flex items-center">
             <a href="/transaction" className="flex">
-              <IonIcon size="large" color="dark" icon={ arrowBackOutline }></IonIcon>
+              <IonIcon size="large" color="light" icon={ arrowBackOutline }></IonIcon>
             </a>
           </nav>
           <div className="p-3 pt-7">
@@ -50,7 +50,7 @@ const AddTransaction = () => {
               <IonInput label="Date" type="date" name="date" className="border-b-2 border-green-500" required></IonInput>
               <IonInput label="Amount" type="number" name="amount" className="border-b-2 border-green-500" required></IonInput>
               <IonInput label="Notes" type="text" name="notes" className="border-b-2 border-green-500" required></IonInput>
-              <button id="submit-transaction" type="submit" className="mt-7 bg-green-500 font-bold w-full !p-2 !rounded">Submit</button>
+              <button id="submit-transaction" type="submit" className="mt-7 bg-green-500 text-white font-bold w-full !p-2 !rounded">Submit</button>
             </form>
           </div>
         </div>

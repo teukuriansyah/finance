@@ -27,11 +27,11 @@ const Login = () => {
     }
   },[submitLogin])
   return (
-    <IonPage>
+    <IonPage className="!text-white">
       <div className="flex justify-center items-center h-full">
         <div className="bg-green-500 w-3/4 rounded p-3 gap-7 flex flex-col justify-between">
           <div className="flex flex-col justify-center items-center h-1/3">
-           <IonIcon color="dark" size="large" icon={personCircle}></IonIcon>
+           <IonIcon color="light" size="large" icon={personCircle}></IonIcon>
            <IonTitle>Login</IonTitle>
           </div>
           <div>

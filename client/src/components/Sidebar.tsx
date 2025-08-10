@@ -10,8 +10,8 @@ function Sidebar(props) {
           <IonToolbar color="success">
             <div className="px-3 gap-3">
               <a href="/user" className="flex gap-3">
-                <IonIcon color="dark" size="large" icon={personCircle}></IonIcon>
-                <IonTitle color="dark">{props.name}</IonTitle>
+                <IonIcon color="light" size="large" icon={personCircle}></IonIcon>
+                <IonTitle color="light">{props.name}</IonTitle>
               </a>
             </div>
           </IonToolbar>
@@ -19,21 +19,21 @@ function Sidebar(props) {
         <IonContent>
           <ul className="pt-3 flex flex-col gap-1">
             <li className={`${props.active === "/" ? "bg-green-500" : ""} flex`}>
-              <a href="/" className="!text-white text-2xl font-bold p-3 w-full flex gap-3">
-                <IonIcon color="dark" size="large" icon={props.active === "/" ? homeSharp : homeOutline}></IonIcon>
-                <span>Home</span>
+              <a href="/" className="!text-black text-2xl font-bold p-3 w-full flex gap-3">
+                <IonIcon color={`${props.active === "/" ? "light" : "dark"}`} size="large" icon={props.active === "/" ? homeSharp : homeOutline}></IonIcon>
+                <span className={`${props.active === "/" ? "text-white" : "text-black"}`}>Home</span>
               </a>
             </li>
             <li className={`${props.active === "/transaction" ? "bg-green-500" : ""} flex`}>
-              <a href="/transaction" className="!text-white text-2xl font-bold p-3 w-full flex gap-3">
-                <IonIcon color="dark" size="large" icon={props.active === "/transaction" ? cashSharp : cashOutline}></IonIcon>
-                <span>Transaction</span>
+              <a href="/transaction" className="!text-black text-2xl font-bold p-3 w-full flex gap-3">
+                <IonIcon color={`${props.active === "/transaction" ? "light" : "dark"}`} size="large" icon={props.active === "/transaction" ? cashSharp : cashOutline}></IonIcon>
+                <span className={`${props.active === "/transaction" ? "text-white" : "text-black"}`}>Transaction</span>
               </a>
             </li>
             <li className={`${props.active === "/summary" ? "bg-green-500" : ""} flex`}>
-              <a href="/summary" className="!text-white text-2xl font-bold p-3 w-full flex gap-3">
-                <IonIcon color="dark" size="large" icon={props.active === "/summary" ? documentTextSharp : documentTextOutline}></IonIcon>
-                <span>Summary</span>
+              <a href="/summary" className="!text-black text-2xl font-bold p-3 w-full flex gap-3">
+                <IonIcon color={`${props.active === "/summary" ? "light" : "dark"}`} size="large" icon={props.active === "/summary" ? documentTextSharp : documentTextOutline}></IonIcon>
+                <span className={`${props.active === "/summary" ? "text-white" : "text-black"}`}>Summary</span>
               </a>
             </li>
           </ul>
