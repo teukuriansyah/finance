@@ -1,9 +1,11 @@
 package controller
 import (
+  "github.com/golang-jwt/jwt/v5"
   "github.com/gin-gonic/gin"
   "server/middleware"
   "server/model"
   "server/dto"
+  "strings"
   )
 
 func LoginUser(c*gin.Context) {
@@ -65,5 +67,35 @@ func RegisterUser(c*gin.Context) {
   c.JSON(201,gin.H{
     "statusCode":201,
     "message":"Register successfully",
+  })
+}
+
+func GetUser(c*gin.Context) {
+  header := c.GetHeader("Authorization")
+  
+  token,err := middleware.VerifyToken(strings.Split(header," ")[1])
+  
+  if(err != nil) {
+    c.JSON(401,gin.H{
+      "statusCode":401,
+      "message":"Unauthorized",
+    })
+    return;
+  }
+  
+  claims,_ := token.Claims.(jwt.MapClaims)
+  
+  idUser, _ := claims["id"].(string)
+  email, _ := claims["email"].(string)
+  name, _ := claims["name"].(string)
+  
+  c.JSON(200, gin.H{
+      "statusCode": 200,
+      "data": gin.H{
+          "id":    idUser,
+          "name":  name,
+          "email": email,
+      },
+      "message": "Get user success",
   })
 }

@@ -11,13 +11,18 @@ const User = () => {
   const changePageName = str => str.slice(1, 2).toUpperCase() + str.slice(2).toLowerCase();
   const token = localStorage.getItem("token")
   
-  const getDataUser = () => {
+  const getDataUser = async () => {
     if(token == null) {
       window.location.assign("/login")
     }
     else {
-      const data = jwtDecode(token)
-      setDataUser(data)
+      try {
+        const { data } = await service.getUser(token)
+        setDataUser(data)
+      }
+      catch {
+        window.location.assign("/login")
+      }
     }
   }
   
